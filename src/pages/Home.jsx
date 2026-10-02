@@ -54,19 +54,19 @@ function Home() {
 
           <div className="steps-grid">
             <div className="step-card">
-              <span>01</span>
+              <span>1</span>
               <h3>Photograph</h3>
               <p>Upload clear photos of the dried fruit batch.</p>
             </div>
 
             <div className="step-card">
-              <span>02</span>
+              <span>2</span>
               <h3>Grade</h3>
               <p>The prototype analyzes visual indicators and gives a grade.</p>
             </div>
 
             <div className="step-card">
-              <span>03</span>
+              <span>3</span>
               <h3>Verify</h3>
               <p>A QR code lets a buyer view the batch record and evidence.</p>
             </div>
