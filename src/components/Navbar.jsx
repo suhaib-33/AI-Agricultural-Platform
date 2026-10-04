@@ -7,7 +7,8 @@ function Navbar() {
     <header className="navbar">
       <div className="nav-inner">
         <Link to="/" className="brand">
-          <span>Chitrals Dry</span>
+          <span className="brand-mark">CD</span>
+          <span>ChitralDry</span>
         </Link>
 
         <nav>
@@ -18,14 +19,16 @@ function Navbar() {
             Home
           </Link>
           <Link
-            className={
-              location.pathname === "/create-batch"
-                ? "nav-link active"
-                : "nav-link"
-            }
+            className={location.pathname === "/create-batch" ? "nav-link active" : "nav-link"}
             to="/create-batch"
           >
             Grade a Batch
+          </Link>
+          <Link
+            className={location.pathname.startsWith("/saved-batches") ? "nav-link active" : "nav-link"}
+            to="/saved-batches"
+          >
+            Saved Batches
           </Link>
         </nav>
       </div>

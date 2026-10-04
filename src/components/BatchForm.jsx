@@ -28,8 +28,6 @@ function BatchForm({ formData, setFormData, onSubmit }) {
           >
             <option>Dried Apricots</option>
             <option>Walnuts</option>
-            <option>Almonds</option>
-            <option>Pine Nuts</option>
           </select>
         </label>
 

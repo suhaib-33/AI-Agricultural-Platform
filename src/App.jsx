@@ -5,6 +5,7 @@ import CreateBatch from "./pages/CreateBatch";
 import Analyze from "./pages/Analyze";
 import BatchResult from "./pages/BatchResult";
 import Verify from "./pages/Verify";
+import SavedBatches from "./pages/SavedBatches";
 import "./App.css";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/create-batch" element={<CreateBatch />} />
           <Route path="/analyze" element={<Analyze />} />
           <Route path="/batch/:id" element={<BatchResult />} />
+          <Route path="/saved-batches" element={<SavedBatches />} />
           <Route path="/verify/:id" element={<Verify />} />
         </Routes>
       </main>
