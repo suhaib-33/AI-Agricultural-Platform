@@ -9,7 +9,7 @@ function makeBatchId() {
 
 function Analyze() {
   const navigate = useNavigate();
-  const [progress, setProgress] = useState(8);
+  const [progress, setProgress] = useState(5);
   const [currentCheck, setCurrentCheck] = useState("Preparing photos...");
   const [error, setError] = useState("");
 
@@ -27,13 +27,14 @@ function Analyze() {
 
       const draft = JSON.parse(rawDraft);
       const checks = [
-        ["Preparing photos...", 12],
-        ["AI is checking colour...", 28],
-        ["AI is checking visible defects...", 44],
-        ["AI is checking mould...", 60],
-        ["AI is checking foreign matter...", 74],
-        ["AI is checking size and breakage...", 88],
-        ["Preparing quality grade...", 96],
+        ["Preparing photos...", 10],
+        ["Connecting to vision model...", 20],
+        ["Inspecting colour and appearance...", 36],
+        ["Checking visible defects and damage...", 52],
+        ["Checking for mould-like areas...", 68],
+        ["Checking foreign matter and cleanliness...", 80],
+        ["Assessing size, uniformity and breakage...", 91],
+        ["Generating quality grade...", 97],
       ];
 
       let index = 0;
@@ -62,14 +63,14 @@ function Analyze() {
           analysis,
         };
 
-        setCurrentCheck("AI analysis complete. Saving batch record...");
+        setCurrentCheck("Analysis complete. Saving batch record...");
         setProgress(100);
         await saveBatch(batch);
         sessionStorage.removeItem("chitralDryDraft");
         navigate(`/batch/${batch.id}`, { replace: true });
       } catch (analysisError) {
         if (!cancelled) {
-          setError(analysisError.message || "The AI analysis failed. Please try again.");
+          setError(analysisError.message || "The analysis failed. Please try again.");
         }
       } finally {
         clearInterval(progressTimer);
@@ -92,8 +93,8 @@ function Analyze() {
         <h1>{error ? "Analysis could not be completed" : "Analyzing your batch"}</h1>
         <p>
           {error
-            ? "The AI service could not complete the analysis. Check the message below and try again."
-            : "Gemini is looking at your uploaded photos and assessing the visible quality of the batch."}
+            ? "The quality analysis could not be completed. Check the message below and try again."
+            : "The vision model is examining your uploaded photos and assessing the visible quality of the batch."}
         </p>
 
         {!error && (
@@ -120,9 +121,9 @@ function Analyze() {
 
         {error && (
           <div className="analysis-error">
-            <strong>AI error</strong>
+            <strong>Analysis error</strong>
             <p>{error}</p>
-            <button className="primary-button" onClick={() => navigate("/analyze")}>
+            <button className="primary-button" onClick={() => navigate("/create-batch")}>
               Try Again
             </button>
           </div>

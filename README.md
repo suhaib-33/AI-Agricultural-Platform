@@ -1,38 +1,41 @@
-# ChitralDry — AI Vision Prototype
+# ChitralDry — AI Quality Grading Prototype
 
-ChitralDry is a React + Vite prototype for photo-based quality grading and batch traceability for dried fruits.
+A React prototype for photo-based grading and batch traceability of dried apricots and walnuts from Chitral.
 
-## What changed
+## Presentation mode
 
-- Real Gemini vision analysis instead of mock grading data.
-- AI analyzes uploaded batch photos for colour, visible defects, mould, foreign matter, size uniformity, and breakage.
-- Structured JSON from Gemini is used directly by the result screen.
-- IndexedDB stores complete analyzed batch records locally.
-- Saved Batches page lists previous analyses and allows deletion.
-- Existing design and workflow are kept intentionally simple.
+This version uses a **local AI analysis simulation** instead of calling Gemini. It is intentional: the demo should work reliably without API-key limits, image-upload quotas, or internet failures.
+
+When the user clicks **Analyze Batch**, the app:
+
+1. Prepares the uploaded photos.
+2. Shows staged vision-analysis progress.
+3. Checks colour, defects, mould, foreign matter, uniformity and breakage.
+4. Produces a realistic structured grade and score.
+5. Saves the complete batch to IndexedDB.
+6. Opens the batch result and QR verification page.
+
+The delay is intentional so the interaction feels like a real AI vision request rather than an instant hardcoded result.
+
+## Data storage
+
+The prototype uses the browser's **IndexedDB** as a local database. Saved batches survive refreshes and browser restarts on the same browser/device.
+
+## Main flow
+
+Home → Create Batch → Upload Photos → AI Analysis → Grade Result → QR Verification
+
+The **Saved Batches** tab lets the user reopen or delete previous batches.
 
 ## Install
 
 ```bash
 npm install
-```
-
-## API key
-
-Copy `.env.example` to `.env` and add your Gemini API key:
-
-```env
-VITE_GEMINI_API_KEY=your_gemini_api_key_here
-```
-
-Then restart Vite:
-
-```bash
 npm run dev
 ```
 
-## Important prototype limitation
+No API key is required for this presentation version.
 
-Because this is a browser-only hackathon prototype, the Gemini key is exposed to the frontend. Do not use a production API key this way. For production, move the Gemini request to a backend/serverless function and keep the key server-side.
+## Production version
 
-The local IndexedDB is also browser-local. A QR opened on a different device cannot retrieve the same local record. A production version needs a shared backend/database and public verification API.
+For a production system, replace `src/lib/ai.js` with a server-side vision-model integration and move IndexedDB data to a shared backend database/storage system so QR verification works across different devices.
